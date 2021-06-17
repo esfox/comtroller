@@ -33,6 +33,8 @@ export class Comtroller
     /* Find and run the corresponding command. */
     for(let { name, aliases = [], prefix, run } of this.config.commands)
     {
+      let commandString = command;
+
       /* Get the parameters of the command. */
       const params = string.substr(firstSpace + 1);
 
@@ -47,10 +49,10 @@ export class Comtroller
         if(commandPrefixPart !== prefix)
           continue;
 
-        command = command.substr(prefixLength);
+        commandString = command.substr(prefixLength);
       }
 
-      if(command === name || aliases.includes(command))
+      if(commandString === name || aliases.includes(commandString))
       {
         run({ params, ...otherParams });
         break;

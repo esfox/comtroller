@@ -12,6 +12,7 @@ class Comtroller {
         let command = string.substr(0, firstSpace === -1 ? string.length : firstSpace);
         /* Find and run the corresponding command. */
         for (let { name, aliases = [], prefix, run } of this.config.commands) {
+            let commandString = command;
             /* Get the parameters of the command. */
             const params = string.substr(firstSpace + 1);
             if (!prefix)
@@ -22,9 +23,9 @@ class Comtroller {
                 const commandPrefixPart = command.substr(0, prefixLength);
                 if (commandPrefixPart !== prefix)
                     continue;
-                command = command.substr(prefixLength);
+                commandString = command.substr(prefixLength);
             }
-            if (command === name || aliases.includes(command)) {
+            if (commandString === name || aliases.includes(commandString)) {
                 run(Object.assign({ params }, otherParams));
                 break;
             }
