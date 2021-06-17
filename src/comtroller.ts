@@ -1,7 +1,8 @@
 export interface Command
 {
-  name: string,
-  run(args: any): void,
+  name: string;
+  aliases: string[];
+  run(args: any): void;
   prefix?: string;
 }
 
@@ -10,7 +11,7 @@ export interface ComtrollerConfig
   commands: Command[];
   defaults?:
   {
-    prefix?: string,
+    prefix?: string;
   },
 }
 
@@ -30,7 +31,7 @@ export class Comtroller
     let command = string.substr(0, firstSpace === -1 ? string.length : firstSpace);
 
     /* Find and run the corresponding command. */
-    for(let { name, prefix, run } of this.config.commands)
+    for(let { name, aliases, prefix, run } of this.config.commands)
     {
       /* Get the parameters of the command. */
       const params = string.substr(firstSpace + 1);
@@ -49,7 +50,7 @@ export class Comtroller
         command = command.substr(prefixLength);
       }
 
-      if(command === name)
+      if(command === name || aliases.includes(command))
       {
         run({ params, ...otherParams });
         break;
