@@ -1,11 +1,13 @@
-type ComtrollerConfig =
+interface Command
 {
-  commands:
-  {
-    name: string,
-    run(args: {}): void,
-    prefix?: string;
-  }[];
+  name: string,
+  run(args: {}): void,
+  prefix?: string;
+}
+
+interface ComtrollerConfig
+{
+  commands: Command[];
   defaults?:
   {
     prefix?: string,
