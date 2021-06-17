@@ -1,0 +1,16 @@
+{
+  "name": "comtroller",
+  "version": "0.0.1",
+  "description": "A simple command parsing library.",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsc --watch"
+  },
+  "keywords": [],
+  "types": "dist/index.d.ts",
+  "author": "osairis100@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.3.2"
+  }
+}
