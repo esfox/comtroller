@@ -1,10 +1,7 @@
 declare type ComtrollerConfig = {
     commands: {
         name: string;
-        run(args?: {
-            params?: string;
-            [key: string]: any;
-        }): void;
+        run(args: {}): void;
         prefix?: string;
     }[];
     defaults?: {
