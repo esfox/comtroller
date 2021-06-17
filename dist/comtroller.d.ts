@@ -6,8 +6,8 @@ declare type ComtrollerConfig = {
         }): void;
         prefix?: string;
     }[];
-    defaults: {
-        prefix: string;
+    defaults?: {
+        prefix?: string;
     };
 };
 export declare class Comtroller {

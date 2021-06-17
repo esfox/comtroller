@@ -6,9 +6,9 @@ type ComtrollerConfig =
     run(args?: { params?: string }): void,
     prefix?: string;
   }[];
-  defaults:
+  defaults?:
   {
-    prefix: string,
+    prefix?: string,
   },
 }
 
