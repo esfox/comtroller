@@ -1,11 +1,11 @@
-interface Command
+export interface Command
 {
   name: string,
   run(args: {}): void,
   prefix?: string;
 }
 
-interface ComtrollerConfig
+export interface ComtrollerConfig
 {
   commands: Command[];
   defaults?:

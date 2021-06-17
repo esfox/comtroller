@@ -1,9 +1,9 @@
-interface Command {
+export interface Command {
     name: string;
     run(args: {}): void;
     prefix?: string;
 }
-interface ComtrollerConfig {
+export interface ComtrollerConfig {
     commands: Command[];
     defaults?: {
         prefix?: string;
@@ -14,4 +14,3 @@ export declare class Comtroller {
     constructor(config: ComtrollerConfig);
     run(string: string, otherParams?: {}): void;
 }
-export {};
