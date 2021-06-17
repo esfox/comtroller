@@ -1,6 +1,9 @@
 export interface Command {
     name: string;
-    run(args: {}): void;
+    run(args: {
+        params: string;
+        [key: string]: string;
+    }): void;
     prefix?: string;
 }
 export interface ComtrollerConfig {
