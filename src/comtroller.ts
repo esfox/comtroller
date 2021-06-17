@@ -1,7 +1,7 @@
 export interface Command
 {
   name: string,
-  run(args: {}): void,
+  run(args: any): void,
   prefix?: string;
 }
 
