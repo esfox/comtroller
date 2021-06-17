@@ -3,6 +3,7 @@ declare type ComtrollerConfig = {
         name: string;
         run(args?: {
             params?: string;
+            [key: string]: any;
         }): void;
         prefix?: string;
     }[];

@@ -3,7 +3,7 @@ type ComtrollerConfig =
   commands:
   {
     name: string,
-    run(args?: { params?: string }): void,
+    run(args?: { params?: string, [key: string]: any }): void,
     prefix?: string;
   }[];
   defaults?:
