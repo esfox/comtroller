@@ -11,7 +11,7 @@ class Comtroller {
         const firstSpace = string.indexOf(' ');
         let command = string.substr(0, firstSpace === -1 ? string.length : firstSpace);
         /* Find and run the corresponding command. */
-        for (let { name, aliases, prefix, run } of this.config.commands) {
+        for (let { name, aliases = [], prefix, run } of this.config.commands) {
             /* Get the parameters of the command. */
             const params = string.substr(firstSpace + 1);
             if (!prefix)
