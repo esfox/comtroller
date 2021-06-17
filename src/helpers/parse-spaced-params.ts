@@ -1,12 +1,13 @@
-export function parseSpacedParams(paramsString: string, keys: string[] = []): string[] | {} | void
+export function parseParamsToArray(paramsString: string): string[]
 {
-  if(! paramsString)
-    return;
+  return ! paramsString || paramsString === ''
+    ? []
+    : paramsString.trim().replace(/\s\s+/g, ' ').split(' ');
+}
 
-  const params = paramsString.trim().replace(/\s\s+/g, ' ').split(' ');
-  if(keys.length === 0)
-    return params;
-
+export function parseParamsToObject(paramsString: string, keys: string[] = []): {}
+{
+  const params = parseParamsToArray(paramsString);
   const paramsMap: { [key: string]: string } = {};
   for(const i in keys)
     paramsMap[keys[i]] = params[i]

@@ -14,7 +14,7 @@ class Comtroller {
         for (let { name, aliases = [], prefix, run } of this.config.commands) {
             let commandString = command;
             /* Get the parameters of the command. */
-            const params = string.substr(firstSpace + 1);
+            const params = firstSpace === -1 ? '' : string.substr(firstSpace + 1);
             if (!prefix)
                 prefix = (_a = this.config.defaults) === null || _a === void 0 ? void 0 : _a.prefix;
             /* Get the command string without the prefix. */

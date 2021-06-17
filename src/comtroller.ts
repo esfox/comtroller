@@ -36,7 +36,7 @@ export class Comtroller
       let commandString = command;
 
       /* Get the parameters of the command. */
-      const params = string.substr(firstSpace + 1);
+      const params = firstSpace === -1 ? '' : string.substr(firstSpace + 1);
 
       if(! prefix)
         prefix = this.config.defaults?.prefix;
