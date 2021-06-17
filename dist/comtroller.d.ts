@@ -8,6 +8,7 @@ export interface ComtrollerConfig {
     commands: Command[];
     defaults?: {
         prefix?: string;
+        caseSensitive?: boolean;
     };
 }
 export declare class Comtroller {

@@ -6,7 +6,7 @@ class Comtroller {
         this.config = config;
     }
     run(string, otherParams = {}) {
-        var _a;
+        var _a, _b;
         /* Get the string before the first white space, which is the command. */
         const firstSpace = string.indexOf(' ');
         let command = string.substr(0, firstSpace === -1 ? string.length : firstSpace);
@@ -25,6 +25,8 @@ class Comtroller {
                     continue;
                 commandString = command.substr(prefixLength);
             }
+            if (!((_b = this.config.defaults) === null || _b === void 0 ? void 0 : _b.caseSensitive))
+                commandString = commandString.toLowerCase();
             if (commandString === name || aliases.includes(commandString)) {
                 run(Object.assign({ params }, otherParams));
                 break;

@@ -12,6 +12,7 @@ export interface ComtrollerConfig
   defaults?:
   {
     prefix?: string;
+    caseSensitive?: boolean;
   },
 }
 
@@ -51,6 +52,9 @@ export class Comtroller
 
         commandString = command.substr(prefixLength);
       }
+
+      if(! this.config.defaults?.caseSensitive)
+        commandString = commandString.toLowerCase();
 
       if(commandString === name || aliases.includes(commandString))
       {
