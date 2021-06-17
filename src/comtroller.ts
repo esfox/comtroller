@@ -1,7 +1,7 @@
 export interface Command
 {
   name: string;
-  aliases: string[];
+  aliases?: string[];
   run(args: any): void;
   prefix?: string;
 }
