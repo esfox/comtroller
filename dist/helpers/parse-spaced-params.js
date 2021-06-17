@@ -1,15 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseSpacedParams = void 0;
-function parseSpacedParams(paramsString, keys) {
-    if (keys === void 0) { keys = []; }
+function parseSpacedParams(paramsString, keys = []) {
     if (!paramsString)
         return;
-    var params = paramsString.trim().replace(/\s\s+/g, ' ').split(' ');
+    const params = paramsString.trim().replace(/\s\s+/g, ' ').split(' ');
     if (keys.length === 0)
         return params;
-    var paramsMap = {};
-    for (var i in keys)
+    const paramsMap = {};
+    for (const i in keys)
         paramsMap[keys[i]] = params[i];
     return paramsMap;
 }
