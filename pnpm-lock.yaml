@@ -1,12 +1,60 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@types/node': ^15.12.2
+  nedb-promises: ^5.0.0
   typescript: ^4.3.2
 
+dependencies:
+  nedb-promises: 5.0.0
+
 devDependencies:
+  '@types/node': 15.12.2
   typescript: 4.3.2
 
 packages:
+
+  /@seald-io/binary-search-tree/1.0.2:
+    resolution: {integrity: sha512-+pYGvPFAk7wUR+ONMOlc6A+LUN4kOCFwyPLjyaeS7wVibADPHWYJNYsNtyIAwjF1AXQkuaXElnIc4XjKt55QZA==}
+    dev: false
+
+  /@seald-io/nedb/2.0.3:
+    resolution: {integrity: sha512-NLnaDav050gnAMM8mnKQE9oH3F9RzGdKornukxLJ7BCf2YXEWndTf3Bmd+1mOqFs5DZnTY0SRigIwVXd8L39Xg==}
+    dependencies:
+      '@seald-io/binary-search-tree': 1.0.2
+      async: 0.2.10
+      localforage: 1.9.0
+    dev: false
+
+  /@types/node/15.12.2:
+    resolution: {integrity: sha512-zjQ69G564OCIWIOHSXyQEEDpdpGl+G348RAKY0XXy9Z5kU9Vzv1GMNnkar/ZJ8dzXB3COzD9Mo9NtRZ4xfgUww==}
+    dev: true
+
+  /async/0.2.10:
+    resolution: {integrity: sha1-trvgsGdLnXGXCMo43owjfLUmw9E=}
+    dev: false
+
+  /immediate/3.0.6:
+    resolution: {integrity: sha1-nbHb0Pr43m++D13V5Wu2BigN5ps=}
+    dev: false
+
+  /lie/3.1.1:
+    resolution: {integrity: sha1-mkNrLMd0bKWd56QfpGmz77dr2H4=}
+    dependencies:
+      immediate: 3.0.6
+    dev: false
+
+  /localforage/1.9.0:
+    resolution: {integrity: sha512-rR1oyNrKulpe+VM9cYmcFn6tsHuokyVHFaCM3+osEmxaHTbEk8oQu6eGDfS6DQLWi/N67XRmB8ECG37OES368g==}
+    dependencies:
+      lie: 3.1.1
+    dev: false
+
+  /nedb-promises/5.0.0:
+    resolution: {integrity: sha512-PZ+V+1RScHr3mZHflAMMkx35naGHKVVGtqLwdK2aado7uN2HcIcubiaVlE/X8BTa34RnIHmusVM+VeTj/pnfew==}
+    dependencies:
+      '@seald-io/nedb': 2.0.3
+    dev: false
 
   /typescript/4.3.2:
     resolution: {integrity: sha512-zZ4hShnmnoVnAHpVHWpTcxdv7dWP60S2FsydQLV8V5PbS3FifjWFFRiHSWpDJahly88PRyV5teTSLoq4eG7mKw==}

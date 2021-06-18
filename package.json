@@ -11,6 +11,10 @@
   "author": "osairis100@gmail.com",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^15.12.2",
     "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "nedb-promises": "^5.0.0"
   }
 }
