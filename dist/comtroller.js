@@ -11,7 +11,8 @@ class Comtroller {
         const firstSpace = string.indexOf(' ');
         let command = string.substr(0, firstSpace === -1 ? string.length : firstSpace);
         /* Find and run the corresponding command. */
-        for (let { name, aliases = [], prefix, run } of this.config.commands) {
+        for (let cmd of this.config.commands) {
+            let { name, aliases = [], prefix, run } = cmd;
             let commandString = command;
             /* Get the parameters of the command. */
             const params = firstSpace === -1 ? '' : string.substr(firstSpace + 1);
@@ -29,9 +30,10 @@ class Comtroller {
                 commandString = commandString.toLowerCase();
             if (commandString === name || aliases.includes(commandString)) {
                 run(Object.assign({ params }, otherParams));
-                break;
+                return cmd;
             }
         }
+        return;
     }
 }
 exports.Comtroller = Comtroller;

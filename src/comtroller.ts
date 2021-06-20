@@ -25,15 +25,16 @@ export class Comtroller
     this.config = config;
   }
 
-  public run(string: string, otherParams: {} = {}): void
+  public run(string: string, otherParams: {} = {}): Command | undefined
   {
     /* Get the string before the first white space, which is the command. */
     const firstSpace = string.indexOf(' ');
     let command = string.substr(0, firstSpace === -1 ? string.length : firstSpace);
 
     /* Find and run the corresponding command. */
-    for(let { name, aliases = [], prefix, run } of this.config.commands)
+    for(let cmd of this.config.commands)
     {
+      let { name, aliases = [], prefix, run } = cmd
       let commandString = command;
 
       /* Get the parameters of the command. */
@@ -59,8 +60,10 @@ export class Comtroller
       if(commandString === name || aliases.includes(commandString))
       {
         run({ params, ...otherParams });
-        break;
+        return cmd;
       }
     }
+
+    return;
   }
 }

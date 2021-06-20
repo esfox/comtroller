@@ -14,5 +14,5 @@ export interface ComtrollerConfig {
 export declare class Comtroller {
     private config;
     constructor(config: ComtrollerConfig);
-    run(string: string, otherParams?: {}): void;
+    run(string: string, otherParams?: {}): Command | undefined;
 }
