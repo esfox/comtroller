@@ -83,14 +83,16 @@ export class Cooldowns
     const now = Date.now();
     const end = now + duration;
 
-    const pending = this.cache[name];
-    if(pending)
+    if(! this.cache[name])
+      this.cache[name] = {};
+
+    if(! this.cache[name][pendingKey])
     {
       this.cache[name] = { [pendingKey]: end };
       return false;
     }
 
-    const cooldownEnd = pending[pendingKey] || 0;
+    const cooldownEnd = this.cache[name][pendingKey] || 0;
     if(now < cooldownEnd)
       return cooldownEnd - now;
 
