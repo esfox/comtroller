@@ -34,6 +34,9 @@ export class Comtroller
     /* Find and run the corresponding command. */
     for(let cmd of this.config.commands)
     {
+      if(! cmd)
+        continue;
+
       let { name, aliases = [], prefix, run } = cmd
       let commandString = command;
 
