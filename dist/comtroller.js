@@ -7,22 +7,22 @@ class Comtroller {
     }
     run(string, otherParams = {}) {
         var _a, _b;
-        /* Get the string before the first white space, which is the command. */
-        const firstSpace = string.indexOf(' ');
-        let command = string.substr(0, firstSpace === -1 ? string.length : firstSpace);
+        /* Get the string before the first white space, which is the command,
+          and the rest of the string, which are the params. */
+        const [command, params = ''] = string.split(/\s(.+)/g);
         /* Find and run the corresponding command. */
         for (let cmd of this.config.commands) {
+            if (!cmd)
+                continue;
             let { name, aliases = [], prefix, run } = cmd;
             let commandString = command;
             /* Get the parameters of the command. */
-            const params = firstSpace === -1 ? '' : string.substr(firstSpace + 1);
             if (!prefix)
                 prefix = (_a = this.config.defaults) === null || _a === void 0 ? void 0 : _a.prefix;
             /* Get the command string without the prefix. */
             if (prefix) {
                 const prefixLength = prefix.length;
-                const commandPrefixPart = command.substr(0, prefixLength);
-                if (commandPrefixPart !== prefix)
+                if (command.substr(0, prefixLength) !== prefix)
                     continue;
                 commandString = command.substr(prefixLength);
             }
