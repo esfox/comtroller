@@ -25,45 +25,51 @@ export class Comtroller
     this.config = config;
   }
 
-  public run(string: string, otherParams: {} = {}): Command | undefined
+  public get(string: String): Command | undefined
   {
-    /* Get the string before the first white space, which is the command,
-      and the rest of the string, which are the params. */
-    const [ command, params = '' ] = string.split(/\s(.+)/g);
+    /* Get the string before the first white space, which is the command. */
+    const [command] = string.split(/\s(.+)/g);
 
     /* Find and run the corresponding command. */
     for(let cmd of this.config.commands)
     {
-      if(! cmd)
+      if(!cmd)
         continue;
 
-      let { name, aliases = [], prefix, run } = cmd
+      let { name, aliases = [], prefix } = cmd;
       let commandString = command;
 
       /* Get the parameters of the command. */
-      if(! prefix)
+      if(!prefix)
         prefix = this.config.defaults?.prefix;
 
       /* Get the command string without the prefix. */
       if(prefix)
       {
         const prefixLength = prefix.length;
-        if(command.substr(0, prefixLength) !== prefix)
+        if(command.substring(0, prefixLength) !== prefix)
           continue;
 
-        commandString = command.substr(prefixLength);
+        commandString = command.substring(prefixLength);
       }
 
-      if(! this.config.defaults?.caseSensitive)
+      if(!this.config.defaults?.caseSensitive)
         commandString = commandString.toLowerCase();
 
       if(commandString === name || aliases.includes(commandString))
-      {
-        run({ params, ...otherParams });
         return cmd;
-      }
     }
+  }
 
-    return;
+  public run(string: string, otherParams: {} = {}): Command | undefined
+  {
+    const command = this.get(string);
+    if(!command)
+      return;
+
+    /* Get the string after the first white space of the string, which are the params. */
+    const [, params] = string.split(/\s(.+)/g);
+    command.run({ params, ...otherParams });
+    return command;
   }
 }
