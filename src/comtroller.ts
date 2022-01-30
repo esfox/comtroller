@@ -54,8 +54,12 @@ export class Comtroller
     /* Get the string after the first white space of the string, which are the params. */
     const [, params] = string.split(/\s(.+)/g);
 
-    /* Run the command's guards. */
-    const guards = command.guards || [];
+    /* Combine the default and command's guards. */
+    const defaultGuards = this.config.defaults?.guards || [];
+    const commandGuards = command.guards || [];
+    const guards = defaultGuards.concat(commandGuards);
+
+    /* Run the guards. */
     for(const guard of guards)
     {
       const isGuarded = await guard({ params });

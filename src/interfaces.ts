@@ -9,7 +9,7 @@ export interface Command
   }: {
     params?: string,
     [key: string]: any,
-  }): void;
+  } | any): void;
 }
 
 export interface ComtrollerConfig
@@ -19,6 +19,7 @@ export interface ComtrollerConfig
   {
     prefix?: string;
     caseSensitive?: boolean;
+    guards?: Guard[];
   },
 }
 
