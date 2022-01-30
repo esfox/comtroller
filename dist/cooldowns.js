@@ -25,7 +25,7 @@ class Cooldowns {
                 };
             /* Only create the datastore if any cooldown is set to persist. */
             if (persist && !this.datastore) {
-                let created = fs_1.existsSync(this.dataFilePath);
+                let created = (0, fs_1.existsSync)(this.dataFilePath);
                 this.datastore = new nedb_promises_1.default(this.dataFilePath);
                 if (!created)
                     yield this.datastore.ensureIndex({ fieldName: 'name', unique: true });

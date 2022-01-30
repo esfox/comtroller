@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Comtroller = void 0;
 class Comtroller {
@@ -32,13 +41,22 @@ class Comtroller {
         }
     }
     run(string, otherParams = {}) {
-        const command = this.get(string);
-        if (!command)
-            return;
-        /* Get the string after the first white space of the string, which are the params. */
-        const [, params] = string.split(/\s(.+)/g);
-        command.run(Object.assign({ params }, otherParams));
-        return command;
+        return __awaiter(this, void 0, void 0, function* () {
+            const command = this.get(string);
+            if (!command)
+                return;
+            /* Get the string after the first white space of the string, which are the params. */
+            const [, params] = string.split(/\s(.+)/g);
+            /* Run the command's guards. */
+            const guards = command.guards || [];
+            for (const guard of guards) {
+                const isGuarded = yield guard({ params });
+                if (isGuarded)
+                    return;
+            }
+            command.run(Object.assign({ params }, otherParams));
+            return command;
+        });
     }
 }
 exports.Comtroller = Comtroller;
