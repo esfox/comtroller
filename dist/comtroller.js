@@ -54,7 +54,7 @@ class Comtroller {
             const guards = defaultGuards.concat(commandGuards);
             /* Run the guards. */
             for (const guard of guards) {
-                const isGuarded = yield guard({ params });
+                const isGuarded = yield guard({ command, params });
                 if (isGuarded)
                     return;
             }

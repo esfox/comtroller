@@ -18,15 +18,24 @@ const commands: Command[] = [
     name: 'guarded',
     guards: [({ params }) => params === 'guard'],
     run: () => console.log('should not be run if the params is "guard"'),
-  }
+  },
+  {
+    name: 'disabled',
+    run: () => console.log('should not be run'),
+  },
 ];
+
+const disabledCommands = ['disabled'];
 
 const comtroller = new Comtroller({
   commands,
   defaults:
   {
     prefix: '!',
-    guards: [({ params }) => params === 'no-run'],
+    guards: [
+      ({ params }) => params === 'no-run',
+      ({ command }) => disabledCommands.includes(command.name),
+    ],
   },
 });
 
@@ -78,6 +87,13 @@ test('should successfully run the "guarded" command guard and not run it', async
 {
   const commandString = 'guarded';
   const commandRan = await comtroller.run(`!${commandString} guard`);
+  expect(commandRan).toBeUndefined();
+});
+
+test('should not run a command based on a default guard', async () =>
+{
+  const commandString = 'disabled';
+  const commandRan = await comtroller.run(`!${commandString}`);
   expect(commandRan).toBeUndefined();
 });
 

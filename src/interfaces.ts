@@ -23,9 +23,6 @@ export interface ComtrollerConfig
   },
 }
 
-export type Guard = ({
-  params,
-}: {
-  params?: string,
-  [key: string]: any,
-} | any) => boolean | Promise<boolean>;
+export type Guard = (
+  { command, params }: { command?: Command, params?: string, [key: string]: any, } | any
+) => boolean | Promise<boolean>;

@@ -16,7 +16,8 @@ export interface ComtrollerConfig {
         guards?: Guard[];
     };
 }
-export declare type Guard = ({ params, }: {
+export declare type Guard = ({ command, params }: {
+    command?: Command;
     params?: string;
     [key: string]: any;
 } | any) => boolean | Promise<boolean>;

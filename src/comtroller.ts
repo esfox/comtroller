@@ -62,7 +62,7 @@ export class Comtroller
     /* Run the guards. */
     for(const guard of guards)
     {
-      const isGuarded = await guard({ params });
+      const isGuarded = await guard({ command, params });
       if(isGuarded)
         return;
     }
