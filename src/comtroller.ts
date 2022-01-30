@@ -1,20 +1,4 @@
-export interface Command
-{
-  name: string;
-  aliases?: string[];
-  run(args: any): void;
-  prefix?: string;
-}
-
-export interface ComtrollerConfig
-{
-  commands: Command[];
-  defaults?:
-  {
-    prefix?: string;
-    caseSensitive?: boolean;
-  },
-}
+import { ComtrollerConfig, Command } from './interfaces';
 
 export class Comtroller
 {
@@ -61,7 +45,7 @@ export class Comtroller
     }
   }
 
-  public run(string: string, otherParams: {} = {}): Command | undefined
+  public async run(string: string, otherParams: {} = {}): Promise<Command | undefined>
   {
     const command = this.get(string);
     if(!command)
@@ -69,6 +53,16 @@ export class Comtroller
 
     /* Get the string after the first white space of the string, which are the params. */
     const [, params] = string.split(/\s(.+)/g);
+
+    /* Run the command's guards. */
+    const guards = command.guards || [];
+    for(const guard of guards)
+    {
+      const isGuarded = await guard({ params });
+      if(isGuarded)
+        return;
+    }
+
     command.run({ params, ...otherParams });
     return command;
   }
