@@ -19,4 +19,4 @@ export interface ComtrollerConfig {
 export declare type Guard = ({ params, }: {
     params?: string;
     [key: string]: any;
-}) => boolean | Promise<boolean>;
+} | any) => boolean | Promise<boolean>;

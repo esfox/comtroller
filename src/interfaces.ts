@@ -28,4 +28,4 @@ export type Guard = ({
 }: {
   params?: string,
   [key: string]: any,
-}) => boolean | Promise<boolean>;
+} | any) => boolean | Promise<boolean>;
