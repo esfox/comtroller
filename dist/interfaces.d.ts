@@ -6,13 +6,14 @@ export interface Command {
     run({ params, }: {
         params?: string;
         [key: string]: any;
-    }): void;
+    } | any): void;
 }
 export interface ComtrollerConfig {
     commands: Command[];
     defaults?: {
         prefix?: string;
         caseSensitive?: boolean;
+        guards?: Guard[];
     };
 }
 export declare type Guard = ({ params, }: {

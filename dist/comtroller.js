@@ -41,14 +41,18 @@ class Comtroller {
         }
     }
     run(string, otherParams = {}) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const command = this.get(string);
             if (!command)
                 return;
             /* Get the string after the first white space of the string, which are the params. */
             const [, params] = string.split(/\s(.+)/g);
-            /* Run the command's guards. */
-            const guards = command.guards || [];
+            /* Combine the default and command's guards. */
+            const defaultGuards = ((_a = this.config.defaults) === null || _a === void 0 ? void 0 : _a.guards) || [];
+            const commandGuards = command.guards || [];
+            const guards = defaultGuards.concat(commandGuards);
+            /* Run the guards. */
             for (const guard of guards) {
                 const isGuarded = yield guard({ params });
                 if (isGuarded)
