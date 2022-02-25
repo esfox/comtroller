@@ -88,7 +88,7 @@ export class Cooldowns
 
     if(! this.cache[name][pendingKey])
     {
-      this.cache[name] = { [pendingKey]: end };
+      this.cache[name][pendingKey] = end;
       return false;
     }
 
